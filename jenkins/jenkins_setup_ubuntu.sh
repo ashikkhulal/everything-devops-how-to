@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# jenkins installation script
+# jenkins ubuntu server provisioning script
 
 sudo apt update -y
 sudo apt install openjdk-8-jdk -y
@@ -11,3 +11,6 @@ sudo apt-get update -y
 sudo apt-get install jenkins -y
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword

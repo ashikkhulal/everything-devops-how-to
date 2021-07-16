@@ -2,7 +2,7 @@
 
 **How to setup jenkins on Ubuntu server:**
 
-// install updates:
+// install updates (optional):
     
     $ sudo apt update -y
 
@@ -22,11 +22,11 @@
 
     $ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 
-// install updates again:
+// install updates again (optional):
 
     $ sudo apt-get update -y
 
-// Now, install jenkins:
+// now, install jenkins:
     
     $sudo apt-get install jenkins -y
 
@@ -35,7 +35,7 @@
     $ sudo systemctl start jenkins
     $ sudo systemctl enable jenkins
 
-// Finally, verify on your browser:
+// finally, verify on your browser:
 
     <your-vm-public-ip>:8080
 
