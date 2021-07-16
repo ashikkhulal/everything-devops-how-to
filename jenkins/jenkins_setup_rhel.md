@@ -44,6 +44,10 @@
 
     <your-vm-public-ip>:8080
 
+// (optional) alternatively you can verify jenkins status using following command:
+
+    $ sudo systemctl status jenkins
+
 Note: jenkins initial password address is `/var/lib/jenkins/secrets/initialAdminPassword`. Run following command to view the initial password:
 
     $ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
