@@ -31,7 +31,7 @@
     $ sudo systemctl start jenkins
     $ sudo systemctl enable jenkins
 
-// configure your firewall (if you can't verify with next step):
+// (optional, only if you can't verify with next step, otherwise you can skip this step) configure your firewall:
 
     $ sudo firewall-cmd --permanent --service=jenkins --set-short="Jenkins Service Ports"
     $ sudo firewall-cmd --permanent --service=jenkins --set-description="Jenkins service firewalld port exceptions"
@@ -40,7 +40,7 @@
     $ sudo firewall-cmd --zone=public --add-service=http --permanent
     $ sudo firewall-cmd --reload
 
-// Finally, verify on your browser:
+// finally, verify on your browser:
 
     <your-vm-public-ip>:8080
 
