@@ -40,7 +40,7 @@
     $ sudo firewall-cmd --zone=public --add-service=http --permanent
     $ sudo firewall-cmd --reload
 
-// finally, verify on your browser:
+// finally, verify it on your browser:
 
     <your-vm-public-ip>:8080
 
