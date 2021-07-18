@@ -14,7 +14,7 @@ provider "azurerm" {
 
 # Create a resource group
 resource "azurerm_resource_group" "rg" {
-  name     = "2021-LEARN-eastus-rg"
+  name     = "2021-LEARN-eastus-sonar-rg"
   location = "East US"
   tags = {
     iac       = "terraform"
@@ -25,7 +25,7 @@ resource "azurerm_resource_group" "rg" {
 
 # Create a virtual network
 resource "azurerm_virtual_network" "vnet" {
-  name                = "2021-LEARN-eastus-vnet"
+  name                = "2021-LEARN-eastus-sonar-vnet"
   address_space       = ["10.0.0.0/24"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -39,7 +39,7 @@ resource "azurerm_virtual_network" "vnet" {
 
 # Create a subnet
 resource "azurerm_subnet" "subnet" {
-  name                 = "2021-LEARN-eastus-snet-01"
+  name                 = "2021-LEARN-eastus-sonar-snet-01"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.0.0/24"]
