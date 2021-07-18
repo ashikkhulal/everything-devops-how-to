@@ -2,7 +2,7 @@
 
 # sonar provisioning script for ubuntu server
 
-
+sudo -i
 cp /etc/sysctl.conf /root/sysctl.conf_backup
 cat <<EOT> /etc/sysctl.conf
 vm.max_map_count=262144
@@ -15,34 +15,31 @@ cat <<EOT> /etc/security/limits.conf
 sonarqube   -   nofile   65536
 sonarqube   -   nproc    409
 EOT
-sudo apt-get update -y
-sudo apt-get install openjdk-11-jdk -y
-sudo update-alternatives --config java
+apt-get update -y
+apt-get install openjdk-11-jdk -y
 java -version
-sudo apt update
+apt update -y
 wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
-sudo apt install postgresql postgresql-contrib -y
-#sudo -u postgres psql -c "SELECT version();"
-sudo systemctl enable postgresql.service
-sudo systemctl start  postgresql.service
-sudo echo "postgres:admin123" | chpasswd
+sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
+apt install postgresql postgresql-contrib -y
+systemctl enable postgresql.service
+systemctl start  postgresql.service
+echo "postgres:admin123" | chpasswd
 runuser -l postgres -c "createuser sonar"
 sudo -i -u postgres psql -c "ALTER USER sonar WITH ENCRYPTED PASSWORD 'admin123';"
 sudo -i -u postgres psql -c "CREATE DATABASE sonarqube OWNER sonar;"
 sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;"
 systemctl restart  postgresql
-#systemctl status -l   postgresql
 netstat -tulpena | grep postgres
-sudo mkdir -p /sonarqube/
+mkdir -p /sonarqube/
 cd /sonarqube/
-sudo curl -O https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.3.0.34182.zip
-sudo apt-get install zip -y
-sudo unzip -o sonarqube-8.3.0.34182.zip -d /opt/
-sudo mv /opt/sonarqube-8.3.0.34182/ /opt/sonarqube
-sudo groupadd sonar
-sudo useradd -c "SonarQube - User" -d /opt/sonarqube/ -g sonar sonar
-sudo chown sonar:sonar /opt/sonarqube/ -R
+curl -O https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.3.0.34182.zip
+apt-get install zip -y
+unzip -o sonarqube-8.3.0.34182.zip -d /opt/
+mv /opt/sonarqube-8.3.0.34182/ /opt/sonarqube
+groupadd sonar
+useradd -c "SonarQube - User" -d /opt/sonarqube/ -g sonar sonar
+chown sonar:sonar /opt/sonarqube/ -R
 cp /opt/sonarqube/conf/sonar.properties /root/sonar.properties_backup
 cat <<EOT> /opt/sonarqube/conf/sonar.properties
 sonar.jdbc.username=sonar
