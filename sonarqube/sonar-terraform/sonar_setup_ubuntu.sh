@@ -73,8 +73,6 @@ WantedBy=multi-user.target
 EOT
 systemctl daemon-reload
 systemctl enable sonarqube.service
-#systemctl start sonarqube.service
-#systemctl status -l sonarqube.service
 apt-get install nginx -y
 rm -rf /etc/nginx/sites-enabled/default
 rm -rf /etc/nginx/sites-available/default
@@ -100,7 +98,6 @@ server{
 EOT
 ln -s /etc/nginx/sites-available/sonarqube /etc/nginx/sites-enabled/sonarqube
 systemctl enable nginx.service
-#systemctl restart nginx.service
 sudo ufw allow 80,9000,9001/tcp
 echo "System reboot in 30 sec"
 sleep 30
