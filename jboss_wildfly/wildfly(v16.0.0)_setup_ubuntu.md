@@ -34,7 +34,6 @@
         
         $ sudo mkdir -p /etc/wildfly
         $ sudo cp /opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf /etc/wildfly/
-        $ sudo vim /etc/wildfly/wildfly.conf
         $ sudo cp /opt/wildfly/docs/contrib/scripts/systemd/launch.sh /opt/wildfly/bin/
         $ sudo sh -c 'chmod +x /opt/wildfly/bin/*.sh'
         $ sudo cp /opt/wildfly/docs/contrib/scripts/systemd/wildfly.service /etc/systemd/system/
@@ -61,7 +60,9 @@
 
 12. Now go to your local brower and enter your vm's public ip followed by colon and 8080 port to validate. (make sure you enable 8080 in NSG)
 
-13. Managing the Administrative console remotely:
+**Managing the Administrative console remotely:**
+
+1. Edit the following config file:
         
         $ sudo vim /etc/wildfly/wildfly.conf
         
@@ -70,7 +71,7 @@
         # The address console to bind to
         WILDFLY_CONSOLE_BIND=0.0.0.0  
 
-14. Open the launch .sh script file through the following command:
+2. Open the launch .sh script file through the following command:
         
         $ sudo vim /opt/wildfly/bin/launch.sh
         
@@ -82,11 +83,11 @@
 
         $WILDFLY_HOME/bin/standalone.sh -c $2 -b $3 -bmanagement $4
 
-15. Restart wildfly:
+3.  Restart wildfly:
     
         $ sudo systemctl restart wildfly
 
-16. Finally, edit the wildfly.service file through the following command:
+4.  Finally, edit the wildfly.service file through the following command:
     
         $ sudo vim /etc/systemd/system/wildfly.service
         
@@ -94,14 +95,14 @@
         
         ExecStart=/opt/wildfly/bin/launch.sh $WILDFLY_MODE $WILDFLY_CONFIG $WILDFLY_BIND $WILDFLY_CONSOLE_BIND
 
-17. Then, reload daemon and restart wildfly:
+5.  Then, reload daemon and restart wildfly:
         
         $ sudo systemctl daemon-reload
         $ sudo systemctl restart wildfly
 
-18. Now go to your local brower and enter your vm's public ip followed by colon and 9990 port to validate. (make sure you enable 9990 in NSG)
+6.  Now go to your local brower and enter your vm's public ip followed by colon and 9990 port to validate. (make sure you enable 9990 in NSG)
 
-HOW to Open the Administrative Console CLI:
+**How to Open the Administrative Console CLI:**
 
 1. Open your Ubuntu Terminal and switch to the /opt/wildfly/bin folder from where we will be running the CLI script:
     
